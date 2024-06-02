@@ -1,0 +1,170 @@
+%%%%%%%%%%%% 选择学位类型：学博%%%%%%%%%%
+%%% 单面论文
+% \documentclass[AcMaster]{BJTU-thesis}  
+%%% 双面论文
+\documentclass[Doctor,twoside]{BJTU-thesis}
+%%EnMaster专硕
+%%AcMaster学硕
+%%Doctor学博
+
+%%%%%%%%%%%%%%%%%%%     字体     %%%%%%%%%%%%%%%%%%%%%
+\setmainfont{Times New Roman}
+\setCJKmainfont{SimSun}  				   %%% Overleaf 和 TexStudio 字体库不同，使用Overleaf时请注释
+
+
+% 标题宋体加粗问题
+\setCJKfamilyfont{zhsong}[AutoFakeBold = {2.17}]{SimSun}   %%% Overleaf 和 TexStudio 字体库不同，使用Overleaf时请注释
+\renewcommand*{\songti}{\CJKfamily{zhsong}}                %%% Overleaf 和 TexStudio 字体库不同，使用Overleaf时请注释
+
+
+%%%%%%%%%%%%%%%%%%%    导入包    %%%%%%%%%%%%%%%%%%%%%
+% Table
+\newlength\savewidth 
+\newcommand\shline{\noalign{\global\savewidth\arrayrulewidth\global\arrayrulewidth 1.2pt}\hline
+                   \noalign{\global\arrayrulewidth\savewidth}}
+\newcommand{\tablestyle}[2]{\setlength{\tabcolsep}{#1}\renewcommand{\arraystretch}{#2}\centering\fontsize{10pt}{12pt}\selectfont}
+\newcommand{\smalltablestyle}[2]{\setlength{\tabcolsep}{#1}\renewcommand{\arraystretch}{#2}\centering\fontsize{8pt}{10pt}\selectfont}
+
+% other
+\usepackage{pifont}
+\usepackage[ruled]{algorithm2e} 
+% 设置算法环境的关键字为中文
+\renewcommand{\algorithmcfname}{\songti\textbf{算法}} % 修改algorithm环境的标题
+\renewcommand{\KwIn}{\songti\textbf{输入: }} % 修改Input关键字
+\renewcommand{\KwOut}{\songti\textbf{输出: }} % 修改Output关键字
+
+
+
+%%%%%%%%%%%%%%%%%填写封面信息%%%%%%%%%%%%%%%%%%%%%%%%
+\author{}  %作者姓名
+% \author{}  %mis 13处修改(cls有一处)
+\studentNumber{20}  %作者学号
+% \studentNumber{}  %mis
+\advisor{}  %导师姓名
+% \advisor{}  %mis
+\advisorTitle{教授} %导师职称
+\degreeType{工学}  %学位类别
+\major{交通信息工程及控制}  %所属专业
+% \major{}  %mis
+\researchArea{图像处理与模式识别}  %研究方向
+% \researchArea{}  %mis
+\title{面}  %论文题目
+\englishtitle{Research }  %论文题目英文
+\datetime{2024年6月}  %编辑日期
+
+
+%%%%%%%%%%%%%%%%%%%%%%%   单双页   %%%%%%%%%%%%%%%%%%%%%%%%%%
+% 插入空白页
+\usepackage{afterpage}
+\newcommand\myemptypage{
+    \newpage\thispagestyle{empty}\null
+    % \addtocounter{page}{-1}
+    \newpage
+}
+
+% 解决双面包括封面的问题，被包含的内容不分奇偶
+\makeatletter
+\newcommand{\openany}{\@openrightfalse}
+\newcommand{\openright}{\@openrighttrue}
+\makeatother
+
+% twoside解决拉长段落间距问题
+\raggedbottom
+
+\begin{document}
+
+     %%%%%%%  被包含的内容不分奇偶  %%%%%%%%%%%%
+     \openany
+	\makecover
+     % 空白页1
+     \myemptypage
+
+     % 版权
+	% \makeAuthorization
+     \include{chapters/makeAuthorization} 	%版权
+     % 空白页2
+     \myemptypage
+
+     % 内封
+	\makeInfo
+     % 空白页3
+     \myemptypage
+
+     \include{chapters/committee} 	%答辩委员会名单
+     \myemptypage
+ 
+     \include{chapters/thanks} 	%致谢部分
+     % 空白页4
+     \myemptypage
+        
+     \openright
+     %%%%%%%  被包含的内容不分奇偶  %%%%%%%%%%%%
+        
+	\include{chapters/abstract}  %中文摘要
+	\include{chapters/englishabstract}   %英文摘要
+     % \include{chapters/preface}  %序言
+
+	
+	\tableofcontents
+     \newpage\pagenumbering{arabic}
+ 
+        
+ 
+     %正文部分
+     \include{chapters/chapter01} 	%引言
+     \include{chapters/chapter02} 	%第二章
+     \include{chapters/chapter03} 	%第三章
+     \include{chapters/chapter04} 	%第四章
+     \include{chapters/chapter05} 	%第五章
+     \include{chapters/chapter06} 	%第六章
+     \include{chapters/chapter07} 	%第七章
+
+	% \nocite{*}
+         
+	\bibliography{reference/ref}  %参考文献
+     \myemptypage
+
+     \backmatter
+
+     % 附录
+	% \begin{appendix}
+	% 	\input{chapters/appendix01}
+	% \end{appendix}
+
+    % 索引
+     % \include{chapters/index}	
+
+
+	\include{chapters/mresume}  %作者简历
+     \myemptypage
+
+     \include{chapters/resolution}  %博士论文答辩决议
+     \myemptypage
+
+	\include{chapters/statement} 	%独创性声明
+     \myemptypage
+ 
+     \include{chapters/dataset}  %学位论文数据集					
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
